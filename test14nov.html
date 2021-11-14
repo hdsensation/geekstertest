@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+
+h1{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+}
+.op1 {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+
+.active, .op1:hover {
+  background-color: #ccc;
+}
+
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+.op1:after {
+  content: '\02795'; 
+  font-size: 13px;
+  color: white;
+  float: right;
+  margin-left: 5px;
+}
+    </style>
+</head>
+<body>
+    <h1>General question</h1>
+    <div id="container">
+        <button type="button" class="op1">click to know which Wallet accepted</button>
+        <div class="content">
+            <ol type="1">paytm</ol> <br>
+            <ol> mobikwik</ol> <br>
+            <ol>binance</ol>
+        </div>
+        <button type="button" class="op1">click to know internet banking</button>
+        <div class="content">
+            <ul>sbi</ul>
+            <ul>pnb</ul>
+            <ul>bank of baroda</ul>
+        </div>
+    </div>
+    <script>
+        var coll = document.getElementsByClassName("op1");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+    </script>
+</body>
+</html>
