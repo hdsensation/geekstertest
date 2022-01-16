@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <style>
+        .box {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+        }
+
+        #container {
+            color: azure;
+            height: 300px;
+            width: 300px;
+            box-sizing: border-box;
+            border: 5px solid grey;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(202, 87, 87);
+            border-radius: 17px;
+        }
+
+        #city {
+            font-weight: bold;
+            font-size: larger;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="container">
+            <h1 class="location"><span id="location"></span></h1> <br>
+            <h3><img id="icon" src=""><span id="weather"></span></h3>
+            <h4><span id="temp"></span></h4>
+
+        </div>
+    </div>
+
+    <script>
+            link = "https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=bf8d15a80c89aa4f4c82ad6cbb3f5ac5";
+            // fetch('https://api.openweathermap.org/data/2.5/weather?q='+inp.value+'&appid=50a7aa80fa492fa92e874d23ad061374')
+            var request = new XMLHttpRequest();
+            request.open('GET', link, true);
+            request.onload = function () {
+                var obj = JSON.parse(this.response);
+                console.log(obj);
+
+                document.getElementById('weather').innerHTML = obj.weather[0].description;
+                document.getElementById('location').innerHTML = obj.name;
+                document.getElementById('temp').innerHTML = obj.main.temp - 273.15;
+                document.getElementById('icon').src = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+
+                if (request.status >= 200 && request.status < 400) {
+                    var temp = obj.main.temp;
+                }
+                else {
+                    console.log("The city doesn't exist! Kindly check");
+                }
+            }
+            request.send();
+    </script>
+</body>
+
+</html>
